@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statues of Antiquity | Premium Fashion</title>
+    <meta name="description"
+        content="Explore high-end boutique clothing presented on minimalist headless mannequins. Modern Threads, Timeless Forms.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Google Fonts: Playfair Display for Serif, Inter for Sans-Serif -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="loader-content">
+            <h1 class="logo-font">S & A</h1>
+            <p>Loading the gallery...</p>
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="glassmorphism sticky-nav">
+        <div class="nav-brand logo-font">Welcome to WearScape</div>
+        <div class="nav-links">
+            <a href="#hero">Home</a>
+            <a href="#collection">Collection</a>
+            <a href="#" id="cartToggle">Cart (0)</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <!-- Background Animation Canvas -->
+        <canvas id="bg-canvas"></canvas>
+        <div class="hero-content">
+            <h1 class="hero-title">Modern Threads,<br>Timeless Forms.</h1>
+            <a href="#collection" class="btn btn-glow">Explore Collection</a>
+        </div>
+    </section>
+
+    <!-- Search/Filter Bar -->
+    <div class="filter-section glassmorphism" id="collection">
+        <div class="filter-container">
+            <input type="text" id="searchInput" placeholder="Search pieces...">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="regular">Regular</button>
+                <button class="filter-btn" data-filter="unique">Unique</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Gallery -->
+    <main class="gallery-container">
+        <div class="product-grid" id="productGrid">
+            <!-- Product 1 -->
+            <div class="product-card" data-category="regular">
+                <div class="card-image-wrap">
+                    <img src="assets/products/statue_product_1.png" alt="Obsidian Drape Shirt" class="product-image">
+                    <div class="hover-overlay glassmorphism">
+                        <button class="btn btn-quick-view" data-product="1">Quick View</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3>Obsidian Drape Shirt</h3>
+                    <p class="price">$120.00</p>
+                </div>
+            </div>
+            <!-- Product 2 -->
+            <div class="product-card" data-category="unique">
+                <div class="card-image-wrap">
+                    <img src="assets/products/statue_product_2.png" alt="Nocturne Overcoat" class="product-image">
+                    <div class="hover-overlay glassmorphism">
+                        <button class="btn btn-quick-view" data-product="2">Quick View</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3>Nocturne Overcoat</h3>
+                    <p class="price">$350.00</p>
+                </div>
+            </div>
+            <!-- Product 3 -->
+            <div class="product-card" data-category="regular">
+                <div class="card-image-wrap">
+                    <img src="assets/products/statue_product_3.png" alt="Monolith Trousers" class="product-image">
+                    <div class="hover-overlay glassmorphism">
+                        <button class="btn btn-quick-view" data-product="3">Quick View</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3>Monolith Trousers</h3>
+                    <p class="price">$180.00</p>
+                </div>
+            </div>
+            <!-- Product 4 -->
+            <div class="product-card" data-category="unique">
+                <div class="card-image-wrap">
+                    <img src="assets/products/statue_product_4.png" alt="Aeon Vest" class="product-image">
+                    <div class="hover-overlay glassmorphism">
+                        <button class="btn btn-quick-view" data-product="4">Quick View</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3>Aeon Vest</h3>
+                    <p class="price">$220.00</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Shopping Cart Drawer -->
+    <div id="cartDrawer" class="cart-drawer glassmorphism">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button id="closeCart" class="btn-close">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">Your cart is empty.</p>
+            <!-- Items will be injected here via JS -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotalValue">$0.00</span>
+            </div>
+            <button class="btn btn-glow w-100">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div id="cartOverlay" class="cart-overlay"></div>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="product-modal">
+        <div class="modal-content glassmorphism">
+            <button class="btn-close modal-close">&times;</button>
+            <div class="modal-body" id="modalBody">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+</body>
+
+</html>
