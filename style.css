@@ -528,8 +528,356 @@ body {
     color: #ccc;
 }
 
+/* Eternal Deals / Offers Section */
+.offers-section {
+    padding: 80px 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    letter-spacing: 4px;
+    margin-bottom: 50px;
+    display: inline-block;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.8), transparent);
+}
+
+.offers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.offer-card {
+    position: relative;
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 215, 0, 0.1) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    transform: translateZ(0);
+    overflow: hidden;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 250px;
+    transition: box-shadow 0.4s ease, transform 0.4s ease, opacity 0.6s ease;
+    opacity: 0;
+    transform: translateY(50px) translateZ(0);
+}
+
+.offer-card.visible {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+}
+
+.offer-card:hover {
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3), inset 0 0 20px rgba(138, 43, 226, 0.2);
+    transform: translateY(-5px) translateZ(0);
+}
+
+.offer-bg-pattern {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 150px;
+    height: 150px;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M10,10 h80 v80 h-80 v-80 m10,10 v60 h60 v-60 h-60 m10,10 h40 v40 h-40 v-40 m10,10 v20 h20 v-20 h-20" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="5"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.offer-content {
+    position: relative;
+    z-index: 1;
+}
+
+.offer-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: var(--accent);
+}
+
+.offer-content p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+.pulse-gold {
+    font-family: monospace;
+    font-size: 1.5rem;
+    color: var(--accent);
+    animation: goldPulse 2s infinite alternate;
+}
+
+@keyframes goldPulse {
+    from { text-shadow: 0 0 5px rgba(255, 215, 0, 0.2); color: #d4af37; }
+    to { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8); color: #f9d854; }
+}
+
+.btn-glass-fill {
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--text-primary);
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-family: var(--font-body);
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.3s ease, color 0.3s ease;
+    z-index: 1;
+}
+
+.btn-glass-fill::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,215,0,0.4), var(--accent));
+    z-index: -1;
+    transition: left 0.4s ease;
+}
+
+.btn-glass-fill:hover {
+    transform: scale(1.05);
+    border-color: transparent;
+    color: var(--bg-dark);
+}
+
+.btn-glass-fill:hover::before {
+    left: 0;
+}
+
+/* Mega Offers (Gilded Drop) Section */
+:root {
+    --gilded-orange: #ff8c00;
+    --gilded-gold: #ffd700;
+    --border-angle: 0deg;
+}
+
+#section-gilded-drop {
+    padding: 100px 0 50px 0;
+    background: radial-gradient(circle at center, #3d1a00 0%, #070709 70%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.gilded-header {
+    margin-bottom: 60px;
+    padding: 0 5%;
+}
+
+.gilded-header h2 {
+    font-size: 3rem;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 15px rgba(255, 140, 0, 0.4);
+}
+
+.gilded-header p {
+    font-size: 1.2rem;
+    color: #e0b084;
+}
+
+.gilded-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto 80px auto;
+    padding: 0 5%;
+}
+
+.gilded-card {
+    position: relative;
+    border-radius: 12px;
+    padding: 1.5px;
+    overflow: hidden;
+    transform: translateY(50px);
+    opacity: 0;
+    transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.8s ease;
+    will-change: transform, opacity;
+}
+
+.gilded-card.rise {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.gilded-border-wrap {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from var(--border-angle), transparent 0deg, var(--gilded-orange) 90deg, var(--gilded-gold) 180deg, transparent 270deg);
+    z-index: 1;
+}
+
+.gilded-card-bg {
+    position: absolute;
+    top: 1.5px; left: 1.5px; right: 1.5px; bottom: 1.5px;
+    background: rgba(20, 10, 0, 0.3);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-radius: 10px;
+    z-index: 2;
+    background-image: url('assets/products/statue_product_1.png');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+    opacity: 0.9;
+    filter: grayscale(100%) contrast(1.2) brightness(0.2);
+}
+
+.gilded-card-content {
+    position: relative;
+    z-index: 3;
+    padding: 40px 30px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.5);
+    box-shadow: 0 0 20px rgba(255, 140, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+    will-change: box-shadow;
+    overflow: hidden;
+}
+
+.gilded-card:hover .gilded-card-content {
+    box-shadow: 0 0 40px rgba(255, 140, 0, 0.4);
+}
+
+.gilded-card-content::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: skewX(-20deg);
+    animation: shineSweep 5s infinite;
+    pointer-events: none;
+}
+
+@keyframes shineSweep {
+    0% { left: -100%; }
+    20% { left: 200%; }
+    100% { left: 200%; }
+}
+
+.gilded-card-content h3 {
+    font-size: 1.8rem;
+    color: var(--gilded-orange);
+    margin-bottom: 10px;
+}
+
+.gilded-card-content p {
+    color: #ffdcb5;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.gilded-timer-wrap {
+    margin-bottom: 20px;
+}
+
+.gilded-timer-wrap span {
+    font-size: 0.9rem;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.digital-gold {
+    font-family: monospace;
+    font-size: 2rem;
+    color: var(--gilded-gold);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+    margin-top: 5px;
+}
+
+.btn-gilded-cta {
+    align-self: center;
+    width: 100%;
+    background: #000;
+    color: #fff;
+    border: 1px solid var(--gilded-orange);
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.3);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    padding: 12px 0;
+    text-align: center;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-gilded-cta:hover {
+    color: var(--gilded-orange);
+    box-shadow: 0 0 25px rgba(255, 140, 0, 0.6);
+}
+
+/* Horizontal Marquee */
+.marquee-container {
+    width: 100%;
+    overflow: hidden;
+    background: rgba(255, 140, 0, 0.05);
+    border-top: 1px solid rgba(255, 140, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 140, 0, 0.2);
+    padding: 15px 0;
+    white-space: nowrap;
+}
+
+.marquee-content {
+    display: inline-block;
+    font-size: 1rem;
+    letter-spacing: 5px;
+    color: rgba(255, 140, 0, 0.6);
+    animation: marqueeScroll 20s linear infinite;
+}
+
+@keyframes marqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
+    .gilded-grid {
+        grid-template-columns: 1fr;
+    }
+    .offers-grid {
+        grid-template-columns: 1fr;
+    }
+    .offers-section {
+        padding: 100px 5%;
+    }
     .cart-drawer {
         width: 100%;
         right: -100%;

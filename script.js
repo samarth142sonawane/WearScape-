@@ -4,7 +4,13 @@ document.addEventListener("DOMContentLoaded", () => {
         "1": { title: "Obsidian Drape Shirt", price: 120.00, img: "assets/products/statue_product_1.png", desc: "A masterpiece of minimalist draping. The Obsidian Drape Shirt offers a fluid, unrestricted silhouette ideal for the modern curator." },
         "2": { title: "Nocturne Overcoat", price: 350.00, img: "assets/products/statue_product_2.png", desc: "Command the gallery. The Nocturne Overcoat combines structured tailoring with deep, light-absorbing fabrics." },
         "3": { title: "Monolith Trousers", price: 180.00, img: "assets/products/statue_product_3.png", desc: "Carved from premium wool-blend. These trousers fall with statue-like precision." },
-        "4": { title: "Aeon Vest", price: 220.00, img: "assets/products/statue_product_4.png", desc: "Layer depth into your aesthetic. The Aeon Vest is a functional piece that transcends seasonal trends." }
+        "4": { title: "Aeon Vest", price: 220.00, img: "assets/products/statue_product_4.png", desc: "Layer depth into your aesthetic. The Aeon Vest is a functional piece that transcends seasonal trends." },
+        "5": { title: "Ethereal Silk Tunic", price: 280.00, img: "assets/products/statue_product_5.png", desc: "A flowing, ethereal silk tunic in dark charcoal. Features simple, classical drapery." },
+        "6": { title: "Relic Trench Coat", price: 450.00, img: "assets/products/statue_product_6.png", desc: "A structured, avant-garde dark trench coat with sharp, monumental silhouettes." },
+        "7": { title: "Stoic Knit Sweater", price: 190.00, img: "assets/products/statue_product_7.png", desc: "A textured, heavy-knit sweater in deep grey, evocative of carved stone." },
+        "8": { title: "Antiquity Linen Pants", price: 160.00, img: "assets/products/statue_product_8.png", desc: "Wide-leg linen pants with a raw hem in onyx black offering flowing lines." },
+        "9": { title: "Marquis Velvet Jacket", price: 520.00, img: "assets/products/statue_product_9.png", desc: "A plush, dark velvet jacket with a high collar and a majestic presence." },
+        "10": { title: "Oblivion Scarf", price: 95.00, img: "assets/products/statue_product_10.png", desc: "An oversized draped scarf layered intricately in black." }
     };
     
     // --- Preloader & Background Canvas Animation ---
@@ -259,4 +265,111 @@ document.addEventListener("DOMContentLoaded", () => {
             productModal.classList.remove('show');
         }
     });
+
+    // --- Eternal Deals logic ---
+    
+    // 1. Intersection Observer for Scroll Entrance
+    const offerCards = document.querySelectorAll('.offer-card');
+    const offerObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Read the delay and apply it
+                const delay = entry.target.dataset.delay || '0s';
+                entry.target.style.transitionDelay = delay;
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    offerCards.forEach(card => offerObserver.observe(card));
+
+    // 2. Timer Logic
+    const timerElement = document.getElementById('countdown-timer');
+    const card1Content = document.getElementById('offer-card-1-content');
+    
+    // Set your target end date here. For demo, it's 2 hours from current time.
+    // To link to a specific hardcoded date, you would do:
+    // const endDate = new Date('2026-12-31T23:59:59');
+    const endDate = new Date(new Date().getTime() + 2 * 60 * 60 * 1000); 
+
+    function updateTimer() {
+        if (!timerElement) return;
+        
+        const now = new Date();
+        const diff = endDate - now;
+
+        if (diff <= 0) {
+            // Timer hit zero, switch to SignUp state
+            if(card1Content) {
+                card1Content.innerHTML = `
+                    <h3>The Winter Solstice Collection</h3>
+                    <p>The Drop Has Ended.</p>
+                    <a href="#" class="btn btn-glass-fill">Sign Up for Next Drop</a>
+                `;
+            }
+            if(typeof timerInterval !== 'undefined') clearInterval(timerInterval);
+            return;
+        }
+
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+        const pad = (n) => n.toString().padStart(2, '0');
+        timerElement.textContent = `${pad(hours)}h : ${pad(mins)}m : ${pad(secs)}s`;
+    }
+
+    const timerInterval = setInterval(updateTimer, 1000);
+    updateTimer(); // Initial call to avoid 1s delay
+
+    // --- Gilded Drop Logic ---
+    // Living Border Logic
+    let angle = 0;
+    function animateBorder() {
+        angle = (angle + 1) % 360;
+        document.documentElement.style.setProperty('--border-angle', angle + 'deg');
+        requestAnimationFrame(animateBorder);
+    }
+    requestAnimationFrame(animateBorder);
+    
+    // Scroll Reveal for Gilded Cards
+    const gildedCards = document.querySelectorAll('.gilded-card');
+    const gildedObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('rise');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    gildedCards.forEach(card => gildedObserver.observe(card));
+
+    // Countdown Timer Logic
+    const gildedTimerElement = document.getElementById('countdown-timer-gilded');
+    const gildedEndDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000); // 24 hours from now
+
+    function updateGildedTimer() {
+        if (!gildedTimerElement) return;
+        
+        const now = new Date();
+        const diff = gildedEndDate - now;
+
+        if (diff <= 0) {
+            gildedTimerElement.textContent = "00:00:00";
+            if(typeof gildedTimerInterval !== 'undefined') clearInterval(gildedTimerInterval);
+            return;
+        }
+
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+        const pad = (n) => n.toString().padStart(2, '0');
+        gildedTimerElement.textContent = `${pad(hours)}:${pad(mins)}:${pad(secs)}`;
+    }
+
+    const gildedTimerInterval = setInterval(updateGildedTimer, 1000);
+    updateGildedTimer(); // Initial call
 });
